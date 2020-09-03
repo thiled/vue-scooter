@@ -4,28 +4,28 @@ Vue single file loader for production
 
 ## Todo list
 ```
-✅加载vue入口文件  
-🔲vue单文件组件解析
-    ✅分离template/script/style
-    ✅处理script
-        ✅import js
-        ✅相对路径替换成绝对路径
-    ✅import vue (子组件)
-        ✅相对路径替换成绝对路径    
-        ✅防止重复加载
-        ✅遍历
-        ✅递归解析
-    🔲style解析
-        🔲css嵌套 p0
-        🔲scoped p0
-        🔲变量（原生var测试）
-        🔲资源引用路径替换
-    ✅vue-router懒加载测试
-    ✅npm三方库引用 （import cdn文件）
-🔲部署优化（轻量打包）
-    🔲静态资源前缀配置
-    🔲vue切换生产版本
-    🔲其它文件版本控制
+[√] 加载vue入口文件  
+[√] vue单文件组件解析
+    [√] 分离template/script/style
+    [√] 处理script
+        [√] import js
+        [√] 相对路径替换成绝对路径
+    [√] import vue (子组件)
+        [√] 相对路径替换成绝对路径    
+        [√] 防止重复加载
+        [√] 遍历
+        [√] 递归解析
+    [x] style解析
+        [x] css嵌套 p0
+        [x] scoped p0
+        [x] 变量（原生var测试）
+        [x] 资源引用路径替换
+    [√] vue-router懒加载测试
+    [√] npm三方库引用 （import cdn文件）
+[x] 部署优化（轻量打包）
+    [x] 静态资源前缀配置
+    [x] vue切换生产版本
+    [x] 其它文件版本控制
 ...
 ```
 ## License
