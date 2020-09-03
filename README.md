@@ -21,8 +21,8 @@ Vue single file loader for production
         [x] 变量（原生var测试）
         [x] 资源引用路径替换
     [√] vue-router懒加载测试
-    [√] npm三方库引用 （import cdn文件）
-[x] 部署优化（轻量打包）
+    [√] npm三方库引用 (import cdn文件)
+[x] 部署优化 (轻量打包)
     [x] 静态资源前缀配置
     [x] vue切换生产版本
     [x] 其它文件版本控制
