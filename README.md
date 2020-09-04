@@ -22,6 +22,7 @@ Vue single file loader for browser
         [x] 资源引用路径替换
     [√] vue-router懒加载测试
     [√] npm三方库引用 (import cdn文件)
+    [√] 支持静态资源前缀配置
 [x] 配套轻量部署
     [x] 静态资源前缀配置
     [x] vue切换生产版本
