@@ -1,6 +1,6 @@
 Vue single file loader for browser
 ## 警告！实验阶段
-该vue-loader设计用于兼容性要求较低的企业内部系统前端工程，在浏览器端实现vue单文件组件解析, 当前处于实验阶段
+该vue-loader设计用于兼容性要求较低的前端项目 (如企业内部系统), 在浏览器端实现vue单文件组件解析, 当前处于实验阶段
 
 ## Todo list
 ```
