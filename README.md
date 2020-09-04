@@ -1,4 +1,4 @@
-Vue single file loader for production
+Vue single file loader for browser
 ## 警告！实验阶段
 该vue-loader设计用于兼容性要求较低的企业内部系统前端工程，在浏览器端实现vue单文件组件解析, 当前处于实验阶段
 
@@ -22,7 +22,7 @@ Vue single file loader for production
         [x] 资源引用路径替换
     [√] vue-router懒加载测试
     [√] npm三方库引用 (import cdn文件)
-[x] 部署优化 (轻量打包)
+[x] 配套轻量部署
     [x] 静态资源前缀配置
     [x] vue切换生产版本
     [x] 其它文件版本控制
