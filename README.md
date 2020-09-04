@@ -2,6 +2,11 @@ Vue single file loader for browser
 ## 警告！实验阶段
 该vue-loader设计用于兼容性要求较低的前端项目 (如企业内部系统), 在浏览器端实现vue单文件组件解析, 快速启动模块化的静态页面开发, 当前处于实验阶段
 
+## 浏览器兼容性要求
+Chrome 63+  
+Firefox 67+  
+Edge 79+  
+
 ## Todo list
 ```
 [√] 加载vue入口文件  
