@@ -9,12 +9,12 @@ Vue single file loader for browser
     [√] 分离template/script/style
     [√] 处理script
         [√] import js
-        [√] 相对路径替换成绝对路径
-    [√] import vue (子组件)
-        [√] 相对路径替换成绝对路径    
-        [√] 防止重复加载
-        [√] 遍历
-        [√] 递归解析
+            [√] 相对路径替换成绝对路径
+        [√] import vue (子组件)
+            [√] 相对路径替换成绝对路径    
+            [√] 防止重复加载
+            [√] 遍历
+            [√] 递归解析
     [x] style解析
         [x] css嵌套 p0
         [x] scoped p0
