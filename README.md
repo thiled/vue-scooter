@@ -10,7 +10,7 @@ Edge 79+
 ## Todo list
 ```
 [√] 加载vue入口文件  
-[√] vue单文件组件解析
+[-] vue单文件组件解析
     [√] 分离template/script/style
     [√] 处理script
         [√] import js
@@ -20,7 +20,7 @@ Edge 79+
             [√] 防止重复加载
             [√] 遍历
             [√] 递归解析
-    [x] style解析
+    [-] style解析
         [x] css嵌套 p0
         [x] scoped p0
         [x] 变量（原生var测试）
