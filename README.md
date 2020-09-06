@@ -34,5 +34,9 @@ Edge 79+
     [x] 其它文件版本控制
 ...
 ```
+## Dependencies
+[vue](https://github.com/vuejs/vue)  
+[stylis](https://github.com/thysultan/stylis.js)
+
 ## License
 [MIT](http://opensource.org/licenses/MIT)
