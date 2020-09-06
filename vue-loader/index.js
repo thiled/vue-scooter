@@ -2,6 +2,17 @@
  * https://github.com/thiled/vue-loader
  * Released under the MIT License.
  */
+/**
+ * https://github.com/thysultan/stylis.js
+ * Released under the MIT License.
+ */
+import {
+  compile,
+  serialize,
+  stringify,
+} from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
+
+//
 const defaultRoot = location.origin + location.pathname;
 let rootPath = defaultRoot;
 let vueComponents = (window.vueComponents = {}); //vue组件存储
@@ -71,15 +82,15 @@ const load = (vueFileUrl, isFullPath = false) => {
           `const ${componentName}= window.vueComponents['${componentPath}']`
         );
       }
-      // 字符串js转脚本
-      // const encodedJs = encodeURIComponent(script);
+      // 字符串js转脚本, 未知是否需要URI编码?
+      // let script = encodeURIComponent(script);
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
       import(dataUri).then((res) => {
         let component = res.default;
         component.template = template;
         // style apply
-        // TODO css nested
         // TODO css scoped
+        style = serialize(compile(style), stringify);
         let styleElement = document.createElement('style');
         styleElement.append(style);
         document.head.appendChild(styleElement);

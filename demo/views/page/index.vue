@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nested">
     <template>page</template>
     <Module></Module>
     <router-link to="/page2">page2</router-link>
@@ -27,8 +27,8 @@ export default {
 <style>
 div {
   color: red;
-  /* .nested{
-
-  } */
+  .nested {
+    font-size: 14px;
+  }
 }
 </style>
