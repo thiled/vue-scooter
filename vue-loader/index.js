@@ -50,7 +50,7 @@ const load = (vueFileUrl, isFullPath = false) => {
       let vueImports = [];
       // 过滤注释, 识别import,转换路径,提取vue import
       script = script.replace(
-        /(?<![\/*]\s*)(import\s+(\w+)\s+from\s+['"])(.*?)(['"])/g,
+        /(?<![\/*]\s*)(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/sg,
         ($0, $1, $2, $3, $4) => {
           // import相对路径转换
           let fullPath = resolvePath(vueFileUrl, $3);
