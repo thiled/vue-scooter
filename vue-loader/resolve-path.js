@@ -1,5 +1,7 @@
 export default (currentPath, relativePath) => {
   // relativePath
+  //如果是url,取消处理
+  if (relativePath.match(/^https?:\/\//)) return relativePath;
   // 去掉./
   relativePath = relativePath.replace(/^\.\//, '');
   // 拆分'../'
