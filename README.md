@@ -22,8 +22,8 @@ Edge 79+
             [√] 递归解析
     [-] style解析
         [√] css嵌套
+        [√] 变量（原生var测试）
         [x] scoped p0
-        [x] 变量（原生var测试）
         [x] 资源引用路径替换
     [√] vue-router懒加载测试
     [√] npm三方库引用 (import cdn文件)

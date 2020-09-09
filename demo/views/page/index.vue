@@ -29,6 +29,7 @@ div {
   color: red;
   .nested {
     font-size: 14px;
+    color: var(--primary-color);
   }
 }
 </style>

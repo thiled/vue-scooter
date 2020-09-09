@@ -20,4 +20,7 @@ export default {
 </script>
 
 <style>
+:root {
+  --primary-color: blue;
+}
 </style>
