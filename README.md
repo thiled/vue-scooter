@@ -14,17 +14,19 @@ Edge 79+
     [√] 分离template/script/style
     [√] 处理script
         [√] import js
-            [√] 相对路径替换成绝对路径
+            [√] 相对路径替换
         [√] import vue (子组件)
-            [√] 相对路径替换成绝对路径    
+            [√] 相对路径替换    
             [√] 防止重复加载
             [√] 遍历
             [√] 递归解析
+    [√] 处理template
+        [√] 相对路径替换
     [-] style解析
         [√] css嵌套
         [√] 变量（原生var测试）
+        [√] 资源引用相对路径替换
         [x] scoped p0
-        [x] 资源引用路径替换
     [√] vue-router懒加载测试
     [√] npm三方库引用 (import cdn文件)
     [√] 支持静态资源前缀配置

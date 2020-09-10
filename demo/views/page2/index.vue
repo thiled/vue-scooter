@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>page2</div>
+    <img src="../../assets/img/avatar.png" alt />
     <Module></Module>
+    <div class="bg"></div>
   </div>
 </template>
 
@@ -23,4 +25,13 @@ export default {
 </script>
 
 <style>
+img {
+  width: 100px;
+}
+.bg {
+  background: url('../../assets/img/avatar.png');
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+}
 </style>

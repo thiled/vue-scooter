@@ -50,7 +50,7 @@ const load = (vueFileUrl, isFullPath = false) => {
       let vueImports = [];
       // 过滤注释, 识别import,转换路径,提取vue import
       script = script.replace(
-        /(?<![\/*]\s*)(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/sg,
+        /(?<![\/*]\s*)(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/gs,
         ($0, $1, $2, $3, $4) => {
           // import相对路径转换
           let fullPath = resolvePath(vueFileUrl, $3);
@@ -82,6 +82,11 @@ const load = (vueFileUrl, isFullPath = false) => {
           `const ${componentName}= window.vueComponents['${componentPath}']`
         );
       }
+      // 替换tempate中src的相对路径
+      template = template.replace(/(?<=src=('|")).*?(?=("|'))/g, ($0) => {
+        return resolvePath(vueFileUrl, $0);
+      });
+
       // 字符串js转脚本, 未知是否需要URI编码?
       // let script = encodeURIComponent(script);
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
@@ -90,6 +95,10 @@ const load = (vueFileUrl, isFullPath = false) => {
         component.template = template;
         // style apply
         // TODO css scoped
+        //替换style中的url路径
+        style = style.replace(/(?<=url\(('|")).*?(?=("|')\))/g, ($0) => {
+          return resolvePath(vueFileUrl, $0);
+        });
         style = serialize(compile(style), stringify);
         let styleElement = document.createElement('style');
         styleElement.append(style);

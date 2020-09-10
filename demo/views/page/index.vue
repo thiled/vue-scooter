@@ -1,8 +1,10 @@
 <template>
-  <div class="nested">
+  <div class="container">
     <template>page</template>
-    <Module></Module>
-    <router-link to="/page2">page2</router-link>
+    <div class="nested">
+      <Module></Module>
+      <router-link to="/page2">page2</router-link>
+    </div>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
 </script>
 
 <style>
-div {
+.container {
   color: red;
   .nested {
     font-size: 14px;
