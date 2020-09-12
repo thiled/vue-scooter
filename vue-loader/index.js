@@ -17,8 +17,6 @@ import resolvePath from './resolve-path.js';
 const defaultRoot = location.origin + location.pathname;
 let rootPath = defaultRoot;
 let vueComponents = (window.vueComponents = {}); //vue组件存储
-
-
 // 从vue文件读取template/script/style tag
 const getBlock = (data, tag) => {
   let regx = new RegExp(`<${tag}>([\\w\\W]*)<\\/${tag}>`);
@@ -88,7 +86,6 @@ const load = (vueFileUrl, isFullPath = false) => {
       template = template.replace(/(?<=src=('|")).*?(?=("|'))/g, ($0) => {
         return resolvePath(vueFileUrl, $0);
       });
-
       // 字符串js转脚本, 未知是否需要URI编码?
       // script = encodeURIComponent(script);
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
