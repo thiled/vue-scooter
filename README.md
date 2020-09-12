@@ -6,6 +6,7 @@ Vue loader for browser
 Chrome 63+  
 Firefox 67+  
 Edge 79+  
+Safari 11.1+
 
 ## Todo list
 ```
