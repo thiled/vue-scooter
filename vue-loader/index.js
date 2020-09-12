@@ -90,7 +90,7 @@ const load = (vueFileUrl, isFullPath = false) => {
       });
 
       // 字符串js转脚本, 未知是否需要URI编码?
-      // let script = encodeURIComponent(script);
+      // script = encodeURIComponent(script);
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
       import(dataUri).then((res) => {
         let component = res.default;
