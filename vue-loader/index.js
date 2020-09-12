@@ -11,13 +11,13 @@ import {
   serialize,
   stringify,
 } from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
-
+//相对路径转换
+import resolvePath from './resolve-path.js';
 //
 const defaultRoot = location.origin + location.pathname;
 let rootPath = defaultRoot;
 let vueComponents = (window.vueComponents = {}); //vue组件存储
-//相对路径转换
-import resolvePath from './resolve-path.js';
+
 
 // 从vue文件读取template/script/style tag
 const getBlock = (data, tag) => {
@@ -48,9 +48,11 @@ const load = (vueFileUrl, isFullPath = false) => {
       let style = getBlock(data, 'style');
       let script = getBlock(data, 'script');
       let vueImports = [];
-      // 过滤注释, 识别import,转换路径,提取vue import
+      // 清除注释
+      script = script.replace(/(\/\/.*)|(\/\*[\w\W]*?\*\/)/g,'')
+      // 识别import,转换路径,提取vue import
       script = script.replace(
-        /(?<![\/*]\s*)(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/gs,
+        /(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/gs,
         ($0, $1, $2, $3, $4) => {
           // import相对路径转换
           let fullPath = resolvePath(vueFileUrl, $3);

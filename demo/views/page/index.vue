@@ -9,7 +9,13 @@
 </template>
 
 <script>
+//
 import Module from './components/Module.vue';
+import Module2 from '../../components/Module.vue';
+/*  
+import Module2 from '../../components/Module.vue'
+ */
+// import Module2 from '../../components/Module.vue'
 export default {
   name: 'page',
   data() {
