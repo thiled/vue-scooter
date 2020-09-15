@@ -10,6 +10,7 @@ import {
   compile,
   serialize,
   stringify,
+  middleware,
 } from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
 //相对路径转换
 import resolvePath from './resolve-path.js';
@@ -17,11 +18,15 @@ import resolvePath from './resolve-path.js';
 const defaultRoot = location.origin + location.pathname;
 let rootPath = defaultRoot;
 let vueComponents = (window.vueComponents = {}); //vue组件存储
+let vueFileLoadCount = 0;
 // 从vue文件读取template/script/style tag
 const getBlock = (data, tag) => {
-  let regx = new RegExp(`<${tag}>([\\w\\W]*)<\\/${tag}>`);
+  let regx = new RegExp(`<${tag}(.*?)>([\\w\\W]*)<\\/${tag}>`);
   let templateStr = data.match(regx);
-  return templateStr[1].replace(/\s*(.*)/, '$1');
+  return {
+    value: templateStr[2].replace(/\s*(.*)/, '$1'),
+    attrs: templateStr[1],
+  };
 };
 // 更改默认前缀，部署用
 const setRoot = (path) => {
@@ -40,11 +45,14 @@ const load = (vueFileUrl, isFullPath = false) => {
     }
     var xhr = new XMLHttpRequest();
     xhr.onload = async (e) => {
+      vueFileLoadCount++;
       let data = xhr.responseText;
       // 解析vue文件
-      let template = getBlock(data, 'template');
-      let style = getBlock(data, 'style');
-      let script = getBlock(data, 'script');
+      let template = getBlock(data, 'template').value;
+      let script = getBlock(data, 'script').value;
+      let styleObj = getBlock(data, 'style');
+      let style = styleObj.value;
+      let styleScoped = /scoped/.test(styleObj.attrs);
       let vueImports = [];
       // 清除注释
       script = script.replace(/(?:^|\s)(\/\/.*)|(\/\*[\w\W]*?\*\/)/g, '');
@@ -83,22 +91,45 @@ const load = (vueFileUrl, isFullPath = false) => {
         );
       }
       // 替换tempate中src的相对路径
-      template = template.replace(/(\ssrc=['"])(.*?)(?=['"])/g, ($0, $1, $2) => {
-        return $1 + resolvePath(vueFileUrl, $2);
-      });
+      template = template.replace(
+        /(\ssrc=['"])(.*?)(?=['"])/g,
+        ($0, $1, $2) => {
+          return $1 + resolvePath(vueFileUrl, $2);
+        }
+      );
       // 字符串js转脚本, 未知是否需要URI编码?
       // script = encodeURIComponent(script);
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
       import(dataUri).then((res) => {
         let component = res.default;
+        if (styleScoped) {
+          template = template.replace(
+            /(<[\w-]+)/g,
+            `$1 data-v-${vueFileLoadCount}`
+          );
+        }
         component.template = template;
         // style apply
-        // TODO css scoped
-        //替换style中的url路径
+        // 替换style中的url路径
         style = style.replace(/(url\(['"])(.*?)(?=["']\))/g, ($0, $1, $2) => {
           return $1 + resolvePath(vueFileUrl, $2);
         });
-        style = serialize(compile(style), stringify);
+        // css scoped
+        if (styleScoped) {
+          style = serialize(
+            compile(style),
+            middleware([
+              (element) => {
+                if (element.type === 'rule') {
+                  element.props[0] += `[data-v-${vueFileLoadCount}]`;
+                }
+              },
+              stringify,
+            ])
+          );
+        } else {
+          style = serialize(compile(style), stringify);
+        }
         let styleElement = document.createElement('style');
         styleElement.append(style);
         document.head.appendChild(styleElement);
