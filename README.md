@@ -27,7 +27,7 @@ Safari 11.1+
         [√] css嵌套
         [√] 变量（原生var测试）
         [√] 资源引用相对路径替换
-        [x] scoped p0
+        [√] scoped
     [√] vue-router懒加载测试
     [√] npm三方库引用 (import cdn文件)
     [√] 支持静态资源前缀配置
