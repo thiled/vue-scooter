@@ -11,7 +11,7 @@ Safari 11.1+
 ## Todo list
 ```
 [√] 加载vue入口文件  
-[-] vue单文件组件解析
+[√] vue单文件组件解析
     [√] 分离template/script/style
     [√] 处理script
         [√] import js
