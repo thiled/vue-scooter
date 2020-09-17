@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template>module</template>
+    <div class="test">module</div>
   </div>
 </template>
 
@@ -18,5 +18,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.test{
+  font-size: 18px;
+}
 </style>

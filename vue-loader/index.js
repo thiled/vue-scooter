@@ -34,6 +34,7 @@ const setRoot = (path) => {
 };
 //
 const load = (vueFileUrl, isFullPath = false) => {
+  let currentLoadCount;
   if (!isFullPath) {
     vueFileUrl = resolvePath(rootPath, vueFileUrl);
   }
@@ -46,6 +47,7 @@ const load = (vueFileUrl, isFullPath = false) => {
     var xhr = new XMLHttpRequest();
     xhr.onload = async (e) => {
       vueFileLoadCount++;
+      currentLoadCount = vueFileLoadCount;
       let data = xhr.responseText;
       // 解析vue文件
       let template = getBlock(data, 'template').value;
@@ -105,7 +107,7 @@ const load = (vueFileUrl, isFullPath = false) => {
         if (styleScoped) {
           template = template.replace(
             /(<[\w-]+)/g,
-            `$1 data-v-${vueFileLoadCount}`
+            `$1 data-v-${currentLoadCount}`
           );
         }
         component.template = template;
@@ -121,7 +123,7 @@ const load = (vueFileUrl, isFullPath = false) => {
             middleware([
               (element) => {
                 if (element.type === 'rule') {
-                  element.props[0] += `[data-v-${vueFileLoadCount}]`;
+                  element.props[0] += `[data-v-${currentLoadCount}]`;
                 }
               },
               stringify,
