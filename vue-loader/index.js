@@ -12,7 +12,7 @@ import {
   stringify,
   middleware,
 } from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
-//相对路径转换
+// 相对路径转换
 import resolvePath from './resolve-path.js';
 //
 const defaultRoot = location.origin + location.pathname;
@@ -33,8 +33,30 @@ const setRoot = (path) => {
   rootPath = path;
 };
 //
+const applyNestedStyle = (style, scopedDataAttr) => {
+  if (scopedDataAttr) {
+    // style中所有选择器添加scoped相关data属性匹配
+    style = serialize(
+      compile(style),
+      middleware([
+        (element) => {
+          if (element.type === 'rule') {
+            element.props[0] += `[${scopedDataAttr}]`;
+          }
+        },
+        stringify,
+      ])
+    );
+  } else {
+    style = serialize(compile(style), stringify);
+  }
+  let styleElement = document.createElement('style');
+  styleElement.append(style);
+  document.head.appendChild(styleElement);
+};
+//
 const load = (vueFileUrl, isFullPath = false) => {
-  let currentLoadCount;
+  let scopedDataAttr;
   if (!isFullPath) {
     vueFileUrl = resolvePath(rootPath, vueFileUrl);
   }
@@ -47,14 +69,15 @@ const load = (vueFileUrl, isFullPath = false) => {
     var xhr = new XMLHttpRequest();
     xhr.onload = async (e) => {
       vueFileLoadCount++;
-      currentLoadCount = vueFileLoadCount;
       let data = xhr.responseText;
       // 解析vue文件
       let template = getBlock(data, 'template').value;
       let script = getBlock(data, 'script').value;
       let styleObj = getBlock(data, 'style');
       let style = styleObj.value;
-      let styleScoped = /scoped/.test(styleObj.attrs);
+      if (/scoped/.test(styleObj.attrs)) {
+        scopedDataAttr = `data-v-${vueFileLoadCount}`;
+      }
       let vueImports = [];
       // 清除注释
       script = script.replace(/(?:^|\s)(\/\/.*)|(\/\*[\w\W]*?\*\/)/g, '');
@@ -104,37 +127,18 @@ const load = (vueFileUrl, isFullPath = false) => {
       const dataUri = 'data:text/javascript;charset=utf-8,' + script;
       import(dataUri).then((res) => {
         let component = res.default;
-        if (styleScoped) {
-          template = template.replace(
-            /(<[\w-]+)/g,
-            `$1 data-v-${currentLoadCount}`
-          );
+        if (scopedDataAttr) {
+          // template中所有tag加scoped相关data属性
+          template = template.replace(/(<[\w-]+)/g, `$1 ${scopedDataAttr}`);
         }
         component.template = template;
-        // style apply
         // 替换style中的url路径
         style = style.replace(/(url\(['"])(.*?)(?=["']\))/g, ($0, $1, $2) => {
           return $1 + resolvePath(vueFileUrl, $2);
         });
-        // css scoped
-        if (styleScoped) {
-          style = serialize(
-            compile(style),
-            middleware([
-              (element) => {
-                if (element.type === 'rule') {
-                  element.props[0] += `[data-v-${currentLoadCount}]`;
-                }
-              },
-              stringify,
-            ])
-          );
-        } else {
-          style = serialize(compile(style), stringify);
-        }
-        let styleElement = document.createElement('style');
-        styleElement.append(style);
-        document.head.appendChild(styleElement);
+        // style嵌套解析并应用
+        applyNestedStyle(style, scopedDataAttr);
+        //
         resolve(component);
       });
     };
