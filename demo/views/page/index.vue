@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <template>page</template>
+    <template>{{a}}</template>
     <div class="nested">
       <Module></Module>
       <router-link to="/page2">page2</router-link>
@@ -25,9 +25,6 @@ export default {
   },
   components: {
     Module,
-  },
-  mounted() {
-    console.log(this.a);
   },
 };
 </script>

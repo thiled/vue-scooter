@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="test">module</div>
+    <div class="test">{{a}}</div>
   </div>
 </template>
 
@@ -10,16 +10,14 @@ export default {
   data() {
     return {
       a: 'module',
+      tool,
     };
-  },
-  mounted() {
-    console.log(this.a, tool);
   },
 };
 </script>
 
 <style scoped>
-.test{
+.test {
   font-size: 18px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>page2</div>
+    <div>{{a}}</div>
     <img src="../../assets/img/avatar.png" alt />
     <Module></Module>
     <!-- <img src="../../assets/img/avatar.png" alt /> -->
@@ -20,9 +20,7 @@ export default {
   components: {
     Module,
   },
-  mounted() {
-    console.log(this.a);
-  },
+
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template>app</template>
+    <template>{{a}}</template>
     <router-view></router-view>
   </div>
 </template>
@@ -12,9 +12,6 @@ export default {
     return {
       a: 'app',
     };
-  },
-  mounted() {
-    console.log(this.a);
   },
 };
 </script>
