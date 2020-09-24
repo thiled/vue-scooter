@@ -3,9 +3,7 @@
     <div>{{a}}</div>
     <img src="../../assets/img/avatar.png" alt />
     <Module></Module>
-    <!-- <img src="../../assets/img/avatar.png" alt /> -->
     <div class="bg"></div>
-    <!-- <div class="bg2"></div> -->
   </div>
 </template>
 
@@ -20,7 +18,6 @@ export default {
   components: {
     Module,
   },
-
 };
 </script>
 
@@ -34,10 +31,4 @@ img {
   height: 100px;
   background-size: cover;
 }
-/* .bg2 {
-  background: url('../../assets/img/avatar.png');
-  width: 100px;
-  height: 100px;
-  background-size: cover;
-} */
 </style>
