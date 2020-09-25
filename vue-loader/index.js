@@ -177,9 +177,9 @@ const load = (vueFileUrl, isFullPath = false) => {
     vueFileUrl = _resolvePath(rootPath, vueFileUrl);
   }
   return new Promise((resolve, reject) => {
-    if (window[vueFileUrl]) {
+    if (vueComponents[vueFileUrl]) {
       // 读取缓存的组件对象
-      resolve(window[vueFileUrl]);
+      resolve(vueComponents[vueFileUrl]);
       return;
     }
     var xhr = new XMLHttpRequest();
