@@ -1,4 +1,5 @@
 /**
+ * last updated 2020-10-15 19:55:21
  * https://github.com/thiled/vue-loader
  * Released under the MIT License.
  */
@@ -197,7 +198,8 @@ const load = (vueFileUrl, isFullPath = false) => {
       script = await _handleScript(vueFileUrl, script);
       // 字符串js转脚本, 未知是否需要URI编码?
       // script = encodeURIComponent(script);
-      const dataUri = 'data:text/javascript;charset=utf-8,' + script;
+      const dataUri =
+        'data:text/javascript;charset=utf-8,' + script + vueFileLoadCount;
       import(dataUri).then((res) => {
         let component = res.default;
         template = _handleTemplate(vueFileUrl, template, scopedDataAttr);
