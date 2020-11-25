@@ -13,6 +13,8 @@ import {
   stringify,
   middleware,
 } from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
+import hotReloadApi from './vue-hot-reload-api.js';
+hotReloadApi.install(Vue);
 //
 const defaultRoot = location.origin + location.pathname;
 let rootPath = defaultRoot;
@@ -100,11 +102,8 @@ const _handleScript = (vueFileUrl, script) => {
       let element = vueImports.shift();
       let componentName = element.name;
       let componentPath = element.path;
-      let component = await load(componentPath, true);
-      if (!vueComponents[componentPath]) {
-        // 组件对象存储, 相同路径组件只加载一次
-        vueComponents[componentPath] = component;
-      }
+      await _load(componentPath, true);
+
       // 替换import vue文件的语句
       script = script.replace(
         element.importStatement,
@@ -172,13 +171,13 @@ const _handleStyle = (vueFileUrl, style, scopedDataAttr) => {
  * @param {*} vueFileUrl
  * @param {*} isFullPath
  */
-const load = (vueFileUrl, isFullPath = false) => {
+const _load = (vueFileUrl, isFullPath = false, isReload = false) => {
   let scopedDataAttr;
   if (!isFullPath) {
     vueFileUrl = _resolvePath(rootPath, vueFileUrl);
   }
   return new Promise((resolve, reject) => {
-    if (vueComponents[vueFileUrl]) {
+    if (vueComponents[vueFileUrl] && !isReload) {
       // 读取缓存的组件对象
       resolve(vueComponents[vueFileUrl]);
       return;
@@ -204,6 +203,14 @@ const load = (vueFileUrl, isFullPath = false) => {
         let component = res.default;
         template = _handleTemplate(vueFileUrl, template, scopedDataAttr);
         component.template = template;
+        if (!vueComponents[vueFileUrl]) {
+          // 组件对象存储, 相同路径组件只加载一次
+          vueComponents[vueFileUrl] = component;
+          //
+          hotReloadApi.createRecord(vueFileUrl, component);
+        } else if (isReload) {
+          hotReloadApi.reload(vueFileUrl, component);
+        }
         _handleStyle(vueFileUrl, style, scopedDataAttr);
         //
         resolve(component);
@@ -213,7 +220,26 @@ const load = (vueFileUrl, isFullPath = false) => {
     xhr.send();
   });
 };
+
+/**
+ * load vue file
+ * @param {*} vueFileUrl
+ * @param {*} isFullPath
+ */
+const load = (vueFileUrl, isFullPath = false) => {
+  return _load(vueFileUrl, isFullPath);
+};
+
+/**
+ * hot reload vue file
+ * @param {*} vueFileUrl
+ */
+const reload = (vueFileUrl) => {
+  _load(vueFileUrl, false, true);
+};
+
 export default {
   load,
   setRoot,
+  reload,
 };

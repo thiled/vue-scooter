@@ -15,7 +15,7 @@ export default {
   name: 'page',
   data() {
     return {
-      a: 'page',
+      a: 'page1',
     };
   },
   components: {

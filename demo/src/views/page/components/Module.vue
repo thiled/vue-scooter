@@ -9,7 +9,7 @@ import tool from '../../../utils/tool.js';
 export default {
   data() {
     return {
-      a: 'module',
+      a: 'module1',
       tool,
     };
   },
