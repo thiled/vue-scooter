@@ -1,8 +1,8 @@
-import VueLoader from '../../vue-scooter/index.js';
-window.VueLoader = VueLoader;
+import VueScooter from '../../vue-scooter/index.js';
+window.VueScooter = VueScooter;
 import router from './router.js';
 import store from './store/index.js';
-let App = () => VueLoader.load('app.vue');
+let App = () => VueScooter.load('app.vue');
 new Vue({
   el: '#app',
   router,

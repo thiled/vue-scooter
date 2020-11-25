@@ -1,8 +1,8 @@
 import 'https://cdn.jsdelivr.net/npm/vue-router';
-import VueLoader from '../../vue-loader/index.js';
+import VueScooter from '../../vue-scooter/index.js';
 
-const Page = () => VueLoader.load('./views/page/index.vue');
-const Page2 = () => VueLoader.load('./views/page2/index.vue');
+const Page = () => VueScooter.load('./views/page/index.vue');
+const Page2 = () => VueScooter.load('./views/page2/index.vue');
 
 const routes = [
   { path: '/page2', component: Page2 },
