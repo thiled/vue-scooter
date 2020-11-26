@@ -1,5 +1,5 @@
 /**
- * last updated 2020-10-15 19:55:21
+ * last updated 2020-11-26 00:26:19
  * https://github.com/thiled/vue-loader
  * Released under the MIT License.
  */
