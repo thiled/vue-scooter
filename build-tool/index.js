@@ -4,6 +4,8 @@ const childProcess = require('child_process');
 const createHash = require('crypto').createHash;
 const filewalker = require('filewalker');
 const ncp = require('ncp').ncp;
+const mkdirp = require('mkdirp');
+
 const hashLen = 8;
 function copyDir(src, dist) {
   return new Promise((resolve, reject) => {
@@ -84,7 +86,7 @@ exports.run = async (src, target) => {
     if (fs.existsSync(target)) {
       childProcess.spawnSync('rm', ['-rf', target]);
     }
-    fs.mkdirSync(target);
+    mkdirp.sync(target)
   } catch (err) {
     console.log(err);
   }
