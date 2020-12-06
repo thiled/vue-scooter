@@ -1,0 +1,28 @@
+{
+  "name": "vue-scooter",
+  "version": "1.0.0",
+  "description": "A lightweight vue loader for browser",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiled/vue-scooter.git"
+  },
+  "author": "thiled",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thiled/vue-scooter/issues"
+  },
+  "homepage": "https://github.com/thiled/vue-scooter#readme",
+  "devDependencies": {
+    "rollup": "^2.34.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "dependencies": {
+    "stylis": "^4.0.6",
+    "vue-hot-reload-api": "^2.3.4"
+  }
+}

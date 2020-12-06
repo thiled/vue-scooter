@@ -1,19 +1,10 @@
 /**
- * last updated 2020-11-26 00:26:19
- * https://github.com/thiled/vue-loader
+ * https://github.com/thiled/vue-scooter
  * Released under the MIT License.
  */
-/**
- * https://github.com/thysultan/stylis.js
- * Released under the MIT License.
- */
-import {
-  compile,
-  serialize,
-  stringify,
-  middleware,
-} from 'https://cdn.jsdelivr.net/npm/stylis/dist/stylis.mjs';
-import hotReloadApi from './vue-hot-reload-api.js';
+
+import { compile, serialize, stringify, middleware } from 'stylis';
+import hotReloadApi from 'vue-hot-reload-api';
 hotReloadApi.install(Vue);
 //
 const defaultRoot = location.origin + location.pathname;
