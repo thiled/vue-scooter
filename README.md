@@ -42,7 +42,7 @@ Safari 11.1+
 ...
 ```
 ## Dependencies
-[stylis](https://github.com/thysultan/stylis.js)
+[stylis](https://github.com/thysultan/stylis.js)  
 [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api)  
 
 ## License
