@@ -4,7 +4,8 @@
   "description": "A lightweight vue loader for browser",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "dev": "node dev.js"
   },
   "repository": {
     "type": "git",

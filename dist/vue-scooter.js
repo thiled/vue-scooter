@@ -472,7 +472,7 @@ var VueScooter = (function () {
 	      // 解析vue文件
 	      let template = _getBlock(data, 'template').value;
 	      let script = _getBlock(data, 'script').value;
-	      let styleObj = _getBlock(data, 'style');
+	      let styleObj = _getBlock(data, 'style'); 
 	      let style = styleObj.value;
 	      if (/scoped/.test(styleObj.attrs)) {
 	        scopedDataAttr = `data-v-${vueFileLoadCount}`;
