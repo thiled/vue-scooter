@@ -2,16 +2,14 @@
   "name": "build-tool",
   "version": "1.0.0",
   "description": "",
-  "script":{
-    "build":"node build.js"
+  "scripts": {
+    "dev": "vue-scooter-cli --dev",
+    "build": "vue-scooter-cli --build"
   },
   "dependencies": {
-    "filewalker": "^0.1.3",
-    "mkdirp": "^1.0.4",
-    "ncp": "^2.0.0"
+    "vue-scooter-cli": "^0.1.0"
   },
   "devDependencies": {},
-  "scripts": {},
   "author": "",
   "license": "ISC"
 }
