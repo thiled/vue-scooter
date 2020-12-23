@@ -1,7 +1,7 @@
 const path = require('path');
 module.exports = {
+  workspace: './src',
   build: {
-    src: './src',
     dist: './dist',
   },
 };
