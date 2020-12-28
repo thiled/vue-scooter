@@ -4,4 +4,9 @@ module.exports = {
   build: {
     dist: './dist',
   },
+  devServer: {
+    port: 8080,
+    proxy: {},
+  
+  },
 };
