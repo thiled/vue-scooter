@@ -54,10 +54,12 @@ const _resolvePath = (currentPath, relativePath) => {
 const _getBlock = (data, tag) => {
   let regx = new RegExp(`<${tag}(.*?)>([\\w\\W]*)<\\/${tag}>`);
   let templateStr = data.match(regx);
-  return {
-    value: templateStr[2].replace(/\s*(.*)/, '$1'),
-    attrs: templateStr[1],
-  };
+  return templateStr
+    ? {
+        value: templateStr[2].replace(/\s*(.*)/, '$1'),
+        attrs: templateStr[1],
+      }
+    : {};
 };
 
 /**
@@ -130,6 +132,7 @@ const _handleTemplate = (vueFileUrl, template, scopedDataAttr) => {
  * @param {*} scopedDataAttr
  */
 const _handleStyle = (vueFileUrl, style, scopedDataAttr) => {
+  if (!style) return;
   // 替换style中的url路径
   style = style.replace(/(url\(['"])(.*?)(?=["']\))/g, ($0, $1, $2) => {
     return $1 + _resolvePath(vueFileUrl, $2);
@@ -153,6 +156,7 @@ const _handleStyle = (vueFileUrl, style, scopedDataAttr) => {
   }
   // 应用style
   let styleElement = document.createElement('style');
+  styleElement.setAttribute('file', vueFileUrl);
   styleElement.append(style);
   document.head.appendChild(styleElement);
 };
@@ -180,7 +184,7 @@ const _load = (vueFileUrl, isFullPath = false, isReload = false) => {
       // 解析vue文件
       let template = _getBlock(data, 'template').value;
       let script = _getBlock(data, 'script').value;
-      let styleObj = _getBlock(data, 'style'); 
+      let styleObj = _getBlock(data, 'style');
       let style = styleObj.value;
       if (/scoped/.test(styleObj.attrs)) {
         scopedDataAttr = `data-v-${vueFileLoadCount}`;
@@ -200,6 +204,12 @@ const _load = (vueFileUrl, isFullPath = false, isReload = false) => {
           //
           hotReloadApi.createRecord(vueFileUrl, component);
         } else if (isReload) {
+          // 移除旧样式
+          let lastStyleDom = document.querySelector(
+            `style[file="${vueFileUrl}"]`
+          );
+          lastStyleDom && lastStyleDom.remove();
+          // 组件重载
           hotReloadApi.reload(vueFileUrl, component);
         }
         _handleStyle(vueFileUrl, style, scopedDataAttr);

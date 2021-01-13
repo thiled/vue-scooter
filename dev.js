@@ -1,4 +1,6 @@
 const fs = require('fs');
+const exec = require('child_process').exec;
+
 let lastChangeTime;
 fs.watch(
   './src/',
@@ -12,17 +14,21 @@ fs.watch(
       }
     }
     lastChangeTime = new Date();
-    console.warn(new Date(), 'npm run build..');
-    const exec = require('child_process').exec;
-    const cmdStr = 'npm run build';
-    exec(cmdStr, (err, stdout, stderr) => {
-      if (err) {
-        console.log(err);
-        console.warn(new Date(), 'build fail');
-      } else {
-        console.log(stdout);
-        console.warn(new Date(), 'build success');
-      }
-    });
+    console.warn(new Date(), 'npm run dev-build..');
+    runBuild();
   }
 );
+
+function runBuild() {
+  const cmdStr = 'npm run dev-build';
+  exec(cmdStr, (err, stdout, stderr) => {
+    if (err) {
+      console.log(err);
+      console.warn(new Date(), 'build fail');
+    } else {
+      console.log(stdout);
+      console.warn(new Date(), 'build success');
+    }
+  });
+}
+runBuild();

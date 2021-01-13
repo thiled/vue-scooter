@@ -1,11 +1,12 @@
 {
   "name": "vue-scooter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A lightweight vue loader for browser",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "node dev.js"
+    "dev": "node dev.js",
+    "dev-build": "rollup -c rollup.dev.config.js"
   },
   "repository": {
     "type": "git",
