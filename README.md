@@ -1,5 +1,5 @@
-vue-scooter is a lightweight vue file loader for browser
-## 警告！实验阶段
+vue-scooter is a lightweight vue file loader for browser  
+
 该vue-scooter设计用于兼容性要求较低的前端项目 (如企业内部系统), 在浏览器端实现vue单文件组件解析, 快速启动模块化的静态页面开发, 配套轻量化部署, 支持在生产环境运行。
 
 ## 浏览器兼容性要求
