@@ -320,7 +320,7 @@ var VueScooter = (function () {
 	const _resolvePath = (currentPath, relativePath) => {
 	  // relativePath
 	  // 如果是url,取消处理
-	  if (relativePath.match(/^https?:\/\//)) {
+	  if (relativePath.match(/^((https?:)?\/\/)/)) {
 	    return relativePath;
 	  }
 	  // remove ./
