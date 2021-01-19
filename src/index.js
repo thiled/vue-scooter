@@ -145,7 +145,15 @@ const _handleStyle = (vueFileUrl, style, scopedDataAttr) => {
       middleware([
         (element) => {
           if (element.type === 'rule') {
-            element.props[0] += `[${scopedDataAttr}]`;
+            let prop = element.props[0];
+            if (prop.match(/::v-deep/)) {
+              prop = prop.replace(/\s?::v-deep/, '');
+            } else if (prop.match(/::/)) {
+              prop = prop.replace(/::/, `[${scopedDataAttr}]::`);
+            } else {
+              prop += `[${scopedDataAttr}]`;
+            }
+            element.props[0] = prop;
           }
         },
         stringify,

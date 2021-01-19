@@ -5,7 +5,7 @@ let lastChangeTime;
 fs.watch(
   './src/',
   {
-    recursive: true,
+    // recursive: true,
   },
   (event, filename) => {
     if (lastChangeTime) {
