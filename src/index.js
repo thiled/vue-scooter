@@ -198,8 +198,8 @@ const _load = (vueFileUrl, isFullPath = false, isReload = false) => {
         scopedDataAttr = `data-v-${vueFileLoadCount}`;
       }
       script = await _handleScript(vueFileUrl, script);
-      // 字符串js转脚本, 未知是否需要URI编码?
-      // script = encodeURIComponent(script);
+      // 字符串js转脚本, 编码处理特殊字符
+      script = encodeURIComponent(script);
       const dataUri =
         'data:text/javascript;charset=utf-8,' + script + vueFileLoadCount;
       import(dataUri).then((res) => {
