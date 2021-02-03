@@ -20,7 +20,7 @@ fs.watch(
 );
 
 function runBuild() {
-  const cmdStr = 'npm run dev-build';
+  const cmdStr = 'npm run dev:build';
   exec(cmdStr, (err, stdout, stderr) => {
     if (err) {
       console.log(err);
