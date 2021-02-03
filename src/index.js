@@ -150,7 +150,7 @@ const _handleStyle = (vueFileUrl, style, scopedDataAttr) => {
               prop = prop.replace(/\s?::v-deep/, '');
             } else if (prop.match(/::/)) {
               prop = prop.replace(/::/, `[${scopedDataAttr}]::`);
-            } else {
+            } else if (prop !== 'from' && prop !== 'to') {
               prop += `[${scopedDataAttr}]`;
             }
             element.props[0] = prop;
