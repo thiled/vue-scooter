@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "vue-scooter-cli --dev",
-    "build": "vue-scooter-cli --build"
+    "dev": "vue-scooter dev",
+    "build": "vue-scooter build"
   },
   "dependencies": {
-    "vue-scooter-cli": "^0.1.7"
+    "vue-scooter-cli": "^0.2.2"
   },
   "devDependencies": {},
   "author": "",
