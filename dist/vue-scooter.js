@@ -366,7 +366,7 @@ var VueScooter = (function () {
 	    script = script.replace(/(?:^|\s)(\/\/.*)|(\/\*[\w\W]*?\*\/)/g, '');
 	    // 识别import,转换路径,提取vue import
 	    script = script.replace(
-	      /(import\s+(\w+|.*)\s+from\s+['"])(.*?)(['"])/gs,
+	      /(import\s+(.*?)\s+from\s+['"])(.*?)(['"])/gs,
 	      ($0, $1, $2, $3, $4) => {
 	        // import相对路径转换
 	        let fullPath = _resolvePath(vueFileUrl, $3);

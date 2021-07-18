@@ -1,6 +1,6 @@
 {
   "name": "vue-scooter",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A lightweight vue loader for browser",
   "main": "index.js",
   "scripts": {
