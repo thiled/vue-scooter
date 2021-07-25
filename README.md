@@ -1,5 +1,8 @@
-## Introduction
-**vue-scooter** parses single vue file components directly in the browser. It is designed for those projects with low browser compatibility requirements, for people who need to start modular static pages development quickly with good development and maintainance experience.
+# vue-scooter
+<img src="https://user-images.githubusercontent.com/28561045/126886028-2c3916a8-1543-4683-ae5e-04475a7bf703.png" width="100px"/>
+
+## Introduction  
+**vue-scooter** parses single vue file components directly in the browser. It is designed for those projects with low browser compatibility requirements, for people who need to start modular static pages development quickly without any module bundler.
 
 ## Features
 scripts in .vue
