@@ -1,4 +1,3 @@
 node_modules
 demo/dist
-demo/src/vue-scooter.js
 package-lock.json

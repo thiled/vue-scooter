@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <template>{{a}}</template>
+    <template>{{ a }}</template>
     <div class="nested">
-      <Module></Module>
+      <Module class="b"></Module>
       <router-link to="/page2">page2</router-link>
     </div>
   </div>
@@ -24,12 +24,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .container {
   color: red;
   .nested {
     font-size: 14px;
-    color: var(--primary-color);
+
+    ::v-deep {
+      .test {
+        color: var(--primary-color);
+      }
+    }
   }
 }
 </style>

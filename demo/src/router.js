@@ -1,4 +1,4 @@
-import 'https://cdn.jsdelivr.net/npm/vue-router';
+import 'https://cdn.jsdelivr.net/npm/vue-router@3';
 
 const Page = () => VueScooter.load('./views/page/index.vue');
 const Page2 = () => VueScooter.load('./views/page2/index.vue');
