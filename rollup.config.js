@@ -1,6 +1,7 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
+
 const version = require('./package.json').version;
 const banner = `/**
 * vue-scooter v${version}
@@ -17,8 +18,8 @@ export default {
   plugins: [
     nodeResolve(),
     commonjs(),
-    uglify({
-      output: {
+    terser({
+      format: {
         comments: /vue-scooter v\d/,
       },
     }),
