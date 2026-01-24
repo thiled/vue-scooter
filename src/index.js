@@ -103,6 +103,14 @@ const _handleScript = (vueFileUrl, script) => {
         `const ${componentName}= window.vueComponents['${componentPath}']`
       );
     }
+
+    // 处理动态导入: import方法
+    script = script.replace(/import\s*\(\s*['"](.*?)['"]\s*\)/g, ($0, $1) => {
+      // 相对路径转换
+      let fullPath = _resolvePath(vueFileUrl, $1);
+      return `window.vueScooter.load('${fullPath}', true)`;
+    });
+
     resolve(script);
   });
 };
